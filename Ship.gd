@@ -30,16 +30,14 @@ class Accelerator:
 	func _get_done():
 		return progress > 1.0
 	
+	func stop():
+		progress = 1.1
+	
 
 onready var left = Accelerator.new(accel, 0.0)
 onready var right = Accelerator.new(accel, 0.0)
 onready var up = Accelerator.new(accel, 0.0)
 onready var down = Accelerator.new(accel, 0.0)
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,18 +47,28 @@ func _physics_process(delta):
 	var speed = Vector2.ZERO
 	
 	left.integrate(delta * level.timeScale)
-	speed.x -= left.value
+	speed.x -= level.timeScale * left.value
 	
 	right.integrate(delta * level.timeScale)
-	speed.x += right.value
+	speed.x += level.timeScale * right.value
 	
 	up.integrate(delta * level.timeScale)
-	speed.y -= up.value
+	speed.y -= level.timeScale * up.value
 	
 	down.integrate(delta * level.timeScale)
-	speed.y += down.value
+	speed.y += level.timeScale * down.value
 	
-	var _c = move_and_collide(speed)
+	var c = move_and_collide(speed)
+	if c and c.collider:
+		var obj = c.collider
+		while obj and not obj.has_method("on_collide"):
+			obj = obj.get_parent()
+		if obj:
+			obj.on_collide(self, c.normal)
+		left.stop()
+		right.stop()
+		up.stop()
+		down.stop()
 
 func _on_Left_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
