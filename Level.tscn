@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_1.png" type="Texture" id=2]
+[ext_resource path="res://Level.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_5.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_6.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_2.png" type="Texture" id=8]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Ship" parent="." instance=ExtResource( 1 )]
+position = Vector2( 537.828, 420.434 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 533.062, 421.047 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DiceTray" type="HBoxContainer" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_bottom = -64.0
+grow_vertical = 0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dice1" type="TextureButton" parent="CanvasLayer/DiceTray"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 2 )
+
+[node name="Dice2" type="TextureButton" parent="CanvasLayer/DiceTray"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 8 )
+
+[node name="Dice3" type="TextureButton" parent="CanvasLayer/DiceTray"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 4 )
+
+[node name="Dice4" type="TextureButton" parent="CanvasLayer/DiceTray"]
+margin_left = 204.0
+margin_right = 268.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 5 )
+
+[node name="Dice5" type="TextureButton" parent="CanvasLayer/DiceTray"]
+margin_left = 272.0
+margin_right = 336.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 6 )
+
+[node name="Dice6" type="TextureButton" parent="CanvasLayer/DiceTray"]
+margin_left = 340.0
+margin_right = 404.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 7 )
+[connection signal="pressed" from="CanvasLayer/DiceTray/Dice1" to="." method="_on_Dice1_pressed"]
+[connection signal="pressed" from="CanvasLayer/DiceTray/Dice2" to="." method="_on_Dice2_pressed"]
+[connection signal="pressed" from="CanvasLayer/DiceTray/Dice3" to="." method="_on_Dice3_pressed"]
+[connection signal="pressed" from="CanvasLayer/DiceTray/Dice4" to="." method="_on_Dice4_pressed"]
+[connection signal="pressed" from="CanvasLayer/DiceTray/Dice5" to="." method="_on_Dice5_pressed"]
+[connection signal="pressed" from="CanvasLayer/DiceTray/Dice6" to="." method="_on_Dice6_pressed"]
