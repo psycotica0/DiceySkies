@@ -103,3 +103,6 @@ func target_point(shooter, speed):
 		return $Ship.global_position + Vector2(0, vs * t)
 #	prints(t)
 	return $Ship.global_position
+
+func player_pos():
+	return $Ship.global_position

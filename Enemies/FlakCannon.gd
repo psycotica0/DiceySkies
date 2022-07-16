@@ -11,7 +11,7 @@ func _ready():
 	set_process(false)
 	level = get_tree().root.get_child(0)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not active:
 		return
 #	prints(get_instance_id())
@@ -27,12 +27,10 @@ func _on_VisibilityNotifier2D_screen_exited():
 	get_parent().remove_child(self)
 	queue_free()
 
-func _on_WallDetector_body_entered(body):
+func _on_WallDetector_body_entered(_body):
 	onWall = true
 
 func _on_GunCooldown_timeout():
-	prints("Timer Firing")
-	pass # Replace with function body.
 	var levelSpace = level.currentLevel
 #	var levelPos = levelSpace.local_position($Head/SpawnPoint.global_position)
 	var flak = Flak.instance()

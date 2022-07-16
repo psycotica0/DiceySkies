@@ -11,7 +11,7 @@ func _ready():
 	set_process(false)
 	level = get_tree().root.get_child(0)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not active:
 		return
 #	prints(get_instance_id())
