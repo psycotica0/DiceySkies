@@ -90,7 +90,7 @@ func target_point(shooter, speed):
 #	var t1 = -(sqrt(-dx2*vs2 + dx2 * vb2 + dy2*vb2) / (vs2 - vb2)) - (dy*vs) / (vs2 - vb2)
 #	var t2 = (sqrt(-dx2*vs2 + dx2 * vb2 + dy2*vb2) / (vs2 - vb2)) - (dy*vs) / (vs2 - vb2)
 	
-	prints(t1, t2)
+#	prints(t1, t2)
 	if t1 > 0 or t2 > 0:
 		var t
 		if t1 > 0 and t2 > 0:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://KennyShmupTilemap.tres" type="TileSet" id=1]
 [ext_resource path="res://Levels/SimpleTestLevel.gd" type="Script" id=2]
 [ext_resource path="res://Enemies/FlakCannon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Enemies/Mortar.tscn" type="PackedScene" id=4]
 
 [node name="SimpleTestLevel" type="Node2D"]
 script = ExtResource( 2 )
@@ -32,3 +33,9 @@ position = Vector2( 187, -380.5 )
 
 [node name="FlakCannon3" parent="." instance=ExtResource( 3 )]
 position = Vector2( -193.5, -319 )
+
+[node name="Mortar" parent="." instance=ExtResource( 4 )]
+position = Vector2( 69, -521.368 )
+
+[node name="Mortar2" parent="." instance=ExtResource( 4 )]
+position = Vector2( -93.5, -20.7508 )
