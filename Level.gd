@@ -24,7 +24,7 @@ func _ready():
 	currentLevel.level = self
 	$LevelHolder.add_child(currentLevel)
 	$CanvasLayer/DiceTray/Dice1.consume()
-	for i in range(2):
+	for _i in range(2):
 		add_die()
 
 func add_die():
@@ -69,9 +69,37 @@ func _on_Ship_health_updated(health):
 func _on_Ship_dead():
 	prints("Dead...")
 
-
 func _on_DiceTimer_timeout():
 	if $CanvasLayer/DiceTray.get_child_count() < 10:
 		add_die()
 	else:
 		prints("Dead...")
+
+func target_point(shooter, speed):
+	var dy = $Ship.global_position.y - shooter.y
+	var vs = -timeScale * currentLevel.baseSpeed
+	var vs2 = pow(vs, 2)
+	var vb2 = pow(speed, 2)
+	var dx2 = pow($Ship.global_position.x - shooter.x, 2)
+	var dy2 = pow(dy, 2)
+	
+	# I built an equation on paper and got Wolfram Alpha to solve it
+	# This is what it spit out
+	var t1 = (-sqrt(-dx2*vs2 + dx2 * vb2 + dy2*vb2) - dy*vs) / (vs2 - vb2)
+	var t2 = (sqrt(-dx2*vs2 + dx2 * vb2 + dy2*vb2) - dy*vs) / (vs2 - vb2)
+#	var t1 = -(sqrt(-dx2*vs2 + dx2 * vb2 + dy2*vb2) / (vs2 - vb2)) - (dy*vs) / (vs2 - vb2)
+#	var t2 = (sqrt(-dx2*vs2 + dx2 * vb2 + dy2*vb2) / (vs2 - vb2)) - (dy*vs) / (vs2 - vb2)
+	
+	prints(t1, t2)
+	if t1 > 0 or t2 > 0:
+		var t
+		if t1 > 0 and t2 > 0:
+			t = min(t1, t2)
+		elif t1 > 0:
+			t = t1
+		else:
+			t = t2
+		
+		return $Ship.global_position + Vector2(0, vs * t)
+#	prints(t)
+	return $Ship.global_position
