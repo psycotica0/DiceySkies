@@ -37,6 +37,8 @@ func _ready():
 func on_collide(ship, normal):
 	if normal.is_equal_approx(Vector2.DOWN):
 		impulse = Accelerator.new(level.bounce, 1.0)
+	
+	ship.damage(1)
 
 func _physics_process(delta):
 	var speed = Vector2(0, level.timeScale * baseSpeed * delta)

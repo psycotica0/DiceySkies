@@ -73,6 +73,10 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
+
+[node name="DamageTimeout" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 [connection signal="input_event" from="Left" to="." method="_on_Left_input_event"]
 [connection signal="input_event" from="Right" to="." method="_on_Right_input_event"]
 [connection signal="input_event" from="Up" to="." method="_on_Up_input_event"]

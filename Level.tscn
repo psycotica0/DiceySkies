@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_1.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_2.png" type="Texture" id=8]
 [ext_resource path="res://KennyShmupTilemap.tres" type="TileSet" id=9]
 [ext_resource path="res://Walls/Wall1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/d6_outline.png" type="Texture" id=11]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0205128, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -84,9 +85,57 @@ margin_left = 340.0
 margin_right = 404.0
 margin_bottom = 64.0
 texture_normal = ExtResource( 7 )
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Throttle" type="TextureButton" parent="CanvasLayer/MarginContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -81.0
+margin_top = -138.0
+margin_right = 33.0
+margin_bottom = -54.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heal" type="TextureButton" parent="CanvasLayer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 84.0
+texture_normal = ExtResource( 11 )
+
+[node name="Health" type="Label" parent="CanvasLayer/HBoxContainer"]
+margin_left = 68.0
+margin_top = 35.0
+margin_right = 76.0
+margin_bottom = 49.0
+text = "6"
+[connection signal="dead" from="Ship" to="." method="_on_Ship_dead"]
+[connection signal="health_updated" from="Ship" to="." method="_on_Ship_health_updated"]
 [connection signal="pressed" from="CanvasLayer/DiceTray/Dice1" to="." method="_on_Dice1_pressed"]
 [connection signal="pressed" from="CanvasLayer/DiceTray/Dice2" to="." method="_on_Dice2_pressed"]
 [connection signal="pressed" from="CanvasLayer/DiceTray/Dice3" to="." method="_on_Dice3_pressed"]
 [connection signal="pressed" from="CanvasLayer/DiceTray/Dice4" to="." method="_on_Dice4_pressed"]
 [connection signal="pressed" from="CanvasLayer/DiceTray/Dice5" to="." method="_on_Dice5_pressed"]
 [connection signal="pressed" from="CanvasLayer/DiceTray/Dice6" to="." method="_on_Dice6_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/Throttle" to="." method="_on_Throttle_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/Heal" to="." method="_on_Heal_pressed"]

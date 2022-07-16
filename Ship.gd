@@ -1,8 +1,12 @@
 extends KinematicBody2D
 
 export (Curve) var accel
+signal health_updated(health)
+signal dead()
 
 var level
+
+var health = 6
 
 class Accelerator:
 	var progress = 0.0
@@ -46,19 +50,27 @@ func _ready():
 func _physics_process(delta):
 	var speed = Vector2.ZERO
 	
-	left.integrate(delta * level.timeScale)
-	speed.x -= level.timeScale * left.value
+	# Originally the timescale was a kind of time control
+	# I've adjusted it to be throttle control, though, so I turn the same
+	# speed
+	left.integrate(delta) # * level.timeScale)
+	speed.x -= left.value # level.timeScale * left.value
 	
-	right.integrate(delta * level.timeScale)
-	speed.x += level.timeScale * right.value
+	right.integrate(delta) # * level.timeScale)
+	speed.x += right.value # level.timeScale * right.value
 	
-	up.integrate(delta * level.timeScale)
-	speed.y -= level.timeScale * up.value
+	up.integrate(delta) # * level.timeScale)
+	speed.y -= up.value # level.timeScale * up.value
 	
-	down.integrate(delta * level.timeScale)
-	speed.y += level.timeScale * down.value
+	down.integrate(delta) # * level.timeScale)
+	speed.y += down.value # level.timeScale * down.value
 	
-	var c = move_and_collide(speed)
+	var c = move_and_collide(speed, false)
+	if not c:
+		# I was seeing a weird thing where if I was going fast enough
+		# then I'd get pushed without colliding
+		c = move_and_collide(Vector2(0.0, -0.2), false, true, true)
+	
 	if c and c.collider:
 		var obj = c.collider
 		while obj and not obj.has_method("on_collide"):
@@ -95,3 +107,21 @@ func _on_Down_input_event(_viewport, event, _shape_idx):
 		if event.is_pressed() and event.button_index:
 			if down.done:
 				down = Accelerator.new(accel, level.currentDie)
+
+func damage(amount):
+	if not $DamageTimeout.is_stopped():
+		return
+	
+	health -= amount
+	if health < 1:
+		emit_signal("dead")
+	else:
+		emit_signal("health_updated", health)
+	
+	$DamageTimeout.start()
+
+func heal(amount):
+	health += amount
+	if health > 6:
+		health = 1
+	emit_signal("health_updated", health)
