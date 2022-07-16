@@ -86,34 +86,38 @@ func _on_Left_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index:
 			if left.done:
-				left = Accelerator.new(accel, level.currentDie)
+				left = Accelerator.new(accel, level.currentDie.face)
+				level.currentDie.consume()
 
 
 func _on_Right_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index:
 			if right.done:
-				right = Accelerator.new(accel, level.currentDie)
+				right = Accelerator.new(accel, level.currentDie.face)
+				level.currentDie.consume()
 
 
 func _on_Up_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index:
 			if up.done:
-				up = Accelerator.new(accel, level.currentDie)
+				up = Accelerator.new(accel, level.currentDie.face)
+				level.currentDie.consume()
 
 func _on_Down_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index:
 			if down.done:
-				down = Accelerator.new(accel, level.currentDie)
+				down = Accelerator.new(accel, level.currentDie.face)
+				level.currentDie.consume()
 
 func damage(amount):
 	if not $DamageTimeout.is_stopped():
 		return
 	
 	health -= amount
-	if health < 1:
+	if health < 0:
 		emit_signal("dead")
 	else:
 		emit_signal("health_updated", health)
@@ -123,5 +127,5 @@ func damage(amount):
 func heal(amount):
 	health += amount
 	if health > 6:
-		health = 1
+		health = 0
 	emit_signal("health_updated", health)

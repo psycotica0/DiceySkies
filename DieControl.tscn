@@ -1,0 +1,122 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_1.png" type="Texture" id=1]
+[ext_resource path="res://DieControl.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_5.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Kenny Boardgame/PNG/Default (64px)/dice_6.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "set1"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture_normal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "set2"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture_normal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "set3"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture_normal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "set4"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture_normal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "set5"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture_normal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "set6"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture_normal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
+
+[node name="DieControl" type="TextureButton"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture_normal = ExtResource( 7 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/set1 = SubResource( 1 )
+anims/set2 = SubResource( 3 )
+anims/set3 = SubResource( 4 )
+anims/set4 = SubResource( 5 )
+anims/set5 = SubResource( 6 )
+anims/set6 = SubResource( 7 )

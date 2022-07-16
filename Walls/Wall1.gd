@@ -15,5 +15,5 @@ func _on_VisibilityNotifier2D_screen_exited():
 	level.remove_child(self)
 	self.queue_free()
 
-func _on_Wall1_body_entered(body):
+func _on_Wall1_body_entered(_body):
 	prints("Collided")
