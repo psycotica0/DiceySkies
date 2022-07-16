@@ -10,5 +10,4 @@ func _set_face(value):
 	$AnimationPlayer.play("set%d" % value)
 
 func consume():
-	get_parent().remove_child(self)
 	self.queue_free()

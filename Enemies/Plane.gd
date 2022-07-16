@@ -66,5 +66,4 @@ func damage(_v):
 
 func destroy():
 	active = false
-#	get_parent().remove_child(self)
 	queue_free()

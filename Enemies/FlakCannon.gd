@@ -24,7 +24,6 @@ func _on_VisibilityNotifier2D_screen_entered():
 	$GunCooldown.start()
 
 func _on_VisibilityNotifier2D_screen_exited():
-	get_parent().remove_child(self)
 	queue_free()
 
 func _on_WallDetector_body_entered(_body):

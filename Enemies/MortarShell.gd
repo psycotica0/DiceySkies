@@ -11,5 +11,4 @@ func boom():
 		if b.has_method("damage"):
 			b.damage(damage)
 	
-	get_parent().remove_child(self)
 	queue_free()

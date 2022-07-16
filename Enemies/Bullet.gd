@@ -15,10 +15,8 @@ func _physics_process(delta):
 	if c:
 		if c.collider.has_method("damage"):
 			c.collider.damage(1)
-#		get_parent().remove_child(self)
 		queue_free()
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-#	get_parent().remove_child(self)
 	queue_free()
