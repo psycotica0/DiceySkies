@@ -87,6 +87,7 @@ func _on_Ship_health_updated(health):
 
 func fadedOut():
 	$Ship.reset()
+	throttle(2)
 	$CanvasLayer/DiceTray2.reset()
 	for _i in range(3):
 		$CanvasLayer/DiceTray2.roll_die()
@@ -145,9 +146,12 @@ func _on_ShieldReceiver_received(die):
 
 
 func _on_ThrottleReceiver_received(die):
-	timeScale = throttles[die.face]
-	$CanvasLayer/ThrottleGauge.value = die.face
+	throttle(die.face)
 	die.consume()
+
+func throttle(value):
+	timeScale = throttles[value]
+	$CanvasLayer/ThrottleGauge.value = value
 
 func _on_DiceTray2_tooManyDice():
 	_on_Ship_dead()
