@@ -21,6 +21,10 @@ func roll_die():
 	
 	empty.roll()
 
+func reset():
+	for child in $Buttons.get_children():
+		child.active = false
+
 func reshuffle():
 	var empty
 	for child in $Buttons.get_children():

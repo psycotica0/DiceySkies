@@ -16,14 +16,16 @@ const throttles = {
 
 export (Curve) var bounce
 
+var currentLevelScene
 var currentLevel
+var startShipPos
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	currentLevel = preload("res://Levels/SimpleTestLevel.tscn").instance()
-	currentLevel.level = self
-	$LevelHolder.add_child(currentLevel)
-	$CanvasLayer/DiceTray/Dice1.consume()
+	currentLevelScene = preload("res://Levels/SimpleTestLevel.tscn")
+	startShipPos = $Ship.global_position
+	randomize()
+	fadedOut()
 	# Extents
 	var o = $CanvasLayer/Extents/TopLeft.get_global_transform()
 	$Ship.top_left = get_viewport_transform().affine_inverse().xform(o.origin)
@@ -31,10 +33,8 @@ func _ready():
 #	prints(0.25 * (get_viewport_transform().inverse() * b.origin) , get_viewport_transform().affine_inverse().xform(b.origin))
 	$Ship.bottom_right = get_viewport_transform().affine_inverse().xform($CanvasLayer/Extents/BottomRight.get_global_transform().origin)
 #	prints($Ship.top_left, get_viewport_transform().affine_inverse().xform(o.origin))
-	for _i in range(8):
-		add_die()
-		$CanvasLayer/DiceTray2.roll_die()
 	$CanvasLayer/Extents.visible = false
+	load_level()
 
 func add_die():
 	var face = randi() % 6 + 1
@@ -42,6 +42,14 @@ func add_die():
 	die.face = face
 	die.connect("pressed", self, "_on_die_pressed", [die])
 	$CanvasLayer/DiceTray.add_child(die)
+
+func load_level():
+	$Ship.global_position = startShipPos
+	if currentLevel:
+		currentLevel.queue_free()
+	currentLevel = currentLevelScene.instance()
+	currentLevel.level = self
+	$LevelHolder.add_child(currentLevel)
 
 func _on_die_pressed(die):
 	currentDie = die
@@ -76,8 +84,16 @@ func _on_Ship_health_updated(health):
 #	$CanvasLayer/HBoxContainer/Health.text = str(health)
 	$CanvasLayer/ShieldGauge.value = health
 
+func fadedOut():
+	$Ship.reset()
+	$CanvasLayer/DiceTray2.reset()
+	for _i in range(3):
+		$CanvasLayer/DiceTray2.roll_die()
+	load_level()
+	$AnimationPlayer.play("FadeIn")
+
 func _on_Ship_dead():
-	prints("Dead...")
+	$AnimationPlayer.play("FadeOut")
 
 func _on_DiceTimer_timeout():
 	if $CanvasLayer/DiceTray.get_child_count() < 10:
@@ -131,3 +147,6 @@ func _on_ThrottleReceiver_received(die):
 	timeScale = throttles[die.face]
 	$CanvasLayer/ThrottleGauge.value = die.face
 	die.consume()
+
+func _on_DiceTray2_tooManyDice():
+	_on_Ship_dead()

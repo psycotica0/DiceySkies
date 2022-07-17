@@ -93,7 +93,7 @@ margin_bottom = 1160.0
 face = 2
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 autostart = true
 [connection signal="consumed" from="Buttons/DiceButton1" to="." method="_on_DiceButton_consumed"]
 [connection signal="consumed" from="Buttons/DiceButton2" to="." method="_on_DiceButton_consumed"]

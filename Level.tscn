@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://DieControl.tscn" type="PackedScene" id=2]
@@ -16,6 +16,52 @@
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0205128, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Animation" id=3]
+resource_name = "FadeIn"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "FadeOut"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "fadedOut"
+} ]
+}
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 3 )
@@ -210,14 +256,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="DiceTimer" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeIn = SubResource( 3 )
+anims/FadeOut = SubResource( 2 )
 [connection signal="dead" from="Ship" to="." method="_on_Ship_dead"]
 [connection signal="health_updated" from="Ship" to="." method="_on_Ship_health_updated"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/Throttle" to="." method="_on_Throttle_pressed"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/Heal" to="." method="_on_Heal_pressed"]
 [connection signal="diePicked" from="CanvasLayer/DiceTray2" to="." method="_on_DiceTray2_diePicked"]
+[connection signal="tooManyDice" from="CanvasLayer/DiceTray2" to="." method="_on_DiceTray2_tooManyDice"]
 [connection signal="received" from="CanvasLayer/ThrottleReceiver" to="." method="_on_ThrottleReceiver_received"]
 [connection signal="received" from="CanvasLayer/ShieldReceiver" to="." method="_on_ShieldReceiver_received"]
 [connection signal="timeout" from="DiceTimer" to="." method="_on_DiceTimer_timeout"]

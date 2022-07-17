@@ -49,6 +49,11 @@ onready var down = Accelerator.new(accel, 0.0)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	level = get_parent()
+	reset()
+
+func reset():
+	health = 6
+	heal(0)
 	
 var d = 0.0
 
