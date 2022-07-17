@@ -26,10 +26,11 @@ func _ready():
 	$CanvasLayer/DiceTray/Dice1.consume()
 	# Extents
 	var o = $CanvasLayer/Extents/TopLeft.get_global_transform()
-	# I can't figure out how to do the transform properly, so you get 0.25...
-	# GameJam!
-	$Ship.top_left = 0.25 * (get_viewport_transform().inverse() * o.origin)
-	$Ship.bottom_right = 0.25 * (get_viewport_transform().inverse() * $CanvasLayer/Extents/BottomRight.get_global_transform().origin)
+	$Ship.top_left = get_viewport_transform().affine_inverse().xform(o.origin)
+	var b = $CanvasLayer/Extents/BottomRight.get_global_transform()
+#	prints(0.25 * (get_viewport_transform().inverse() * b.origin) , get_viewport_transform().affine_inverse().xform(b.origin))
+	$Ship.bottom_right = get_viewport_transform().affine_inverse().xform($CanvasLayer/Extents/BottomRight.get_global_transform().origin)
+#	prints($Ship.top_left, get_viewport_transform().affine_inverse().xform(o.origin))
 	for _i in range(8):
 		add_die()
 		$CanvasLayer/DiceTray2.roll_die()
