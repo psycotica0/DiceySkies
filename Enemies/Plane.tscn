@@ -23,8 +23,8 @@ tracks/0/keys = {
 }
 
 [node name="Plane" type="KinematicBody2D"]
-collision_layer = 2
-collision_mask = 5
+collision_layer = 8
+collision_mask = 15
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
