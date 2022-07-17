@@ -22,9 +22,10 @@ margin_right = 52.0
 margin_bottom = 52.0
 texture = ExtResource( 3 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DiceButton" parent="." instance=ExtResource( 2 )]
 colour = 3
-[connection signal="mouse_entered" from="." to="." method="_on_DiceReceiver_mouse_entered"]
-[connection signal="mouse_exited" from="DiceButton" to="." method="_on_DiceButton_mouse_exited"]
 [connection signal="picked" from="DiceButton" to="." method="_on_DiceButton_picked"]
