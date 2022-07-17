@@ -1,0 +1,108 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/DiceButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/DiceTray.gd" type="Script" id=2]
+
+[node name="DiceTray" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="DiceButton1" parent="Buttons" instance=ExtResource( 1 )]
+margin_top = 1200.0
+margin_right = -40.0
+margin_bottom = 1160.0
+colour = 1
+
+[node name="DiceButton2" parent="Buttons" instance=ExtResource( 1 )]
+margin_left = 64.0
+margin_top = 1200.0
+margin_right = 24.0
+margin_bottom = 1160.0
+colour = 1
+face = 2
+
+[node name="DiceButton3" parent="Buttons" instance=ExtResource( 1 )]
+margin_left = 128.0
+margin_top = 1200.0
+margin_right = 88.0
+margin_bottom = 1160.0
+colour = 1
+face = 3
+
+[node name="DiceButton4" parent="Buttons" instance=ExtResource( 1 )]
+margin_left = 192.0
+margin_top = 1200.0
+margin_right = 152.0
+margin_bottom = 1160.0
+colour = 1
+face = 4
+
+[node name="DiceButton5" parent="Buttons" instance=ExtResource( 1 )]
+margin_left = 256.0
+margin_top = 1200.0
+margin_right = 216.0
+margin_bottom = 1160.0
+colour = 1
+face = 5
+
+[node name="DiceButton6" parent="Buttons" instance=ExtResource( 1 )]
+margin_left = 320.0
+margin_top = 1200.0
+margin_right = 280.0
+margin_bottom = 1160.0
+colour = 1
+face = 6
+
+[node name="DiceButton7" parent="Buttons" instance=ExtResource( 1 )]
+margin_left = 384.0
+margin_top = 1200.0
+margin_right = 344.0
+margin_bottom = 1160.0
+colour = 1
+face = 5
+
+[node name="DiceButton8" parent="Buttons" instance=ExtResource( 1 )]
+margin_left = 448.0
+margin_top = 1200.0
+margin_right = 408.0
+margin_bottom = 1160.0
+colour = 2
+face = 4
+
+[node name="DiceButton9" parent="Buttons" instance=ExtResource( 1 )]
+margin_left = 512.0
+margin_top = 1200.0
+margin_right = 472.0
+margin_bottom = 1160.0
+colour = 2
+face = 3
+
+[node name="DiceButton10" parent="Buttons" instance=ExtResource( 1 )]
+margin_left = 576.0
+margin_top = 1200.0
+margin_right = 536.0
+margin_bottom = 1160.0
+face = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+[connection signal="consumed" from="Buttons/DiceButton1" to="." method="_on_DiceButton_consumed"]
+[connection signal="consumed" from="Buttons/DiceButton2" to="." method="_on_DiceButton_consumed"]
+[connection signal="consumed" from="Buttons/DiceButton3" to="." method="_on_DiceButton_consumed"]
+[connection signal="consumed" from="Buttons/DiceButton4" to="." method="_on_DiceButton_consumed"]
+[connection signal="consumed" from="Buttons/DiceButton5" to="." method="_on_DiceButton_consumed"]
+[connection signal="consumed" from="Buttons/DiceButton6" to="." method="_on_DiceButton_consumed"]
+[connection signal="consumed" from="Buttons/DiceButton7" to="." method="_on_DiceButton_consumed"]
+[connection signal="consumed" from="Buttons/DiceButton8" to="." method="_on_DiceButton_consumed"]
+[connection signal="consumed" from="Buttons/DiceButton9" to="." method="_on_DiceButton_consumed"]
+[connection signal="consumed" from="Buttons/DiceButton10" to="." method="_on_DiceButton_consumed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

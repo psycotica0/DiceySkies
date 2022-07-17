@@ -1,6 +1,6 @@
 extends Node2D
 
-var currentDie = 1
+var currentDie
 var timeScale = 1.0
 
 const Die = preload("res://DieControl.tscn")
@@ -64,7 +64,8 @@ func _on_Heal_pressed():
 	currentDie.consume()
 
 func _on_Ship_health_updated(health):
-	$CanvasLayer/HBoxContainer/Health.text = str(health)
+#	$CanvasLayer/HBoxContainer/Health.text = str(health)
+	$CanvasLayer/ShieldGauge.value = health
 
 func _on_Ship_dead():
 	prints("Dead...")
@@ -106,3 +107,18 @@ func target_point(shooter, speed):
 
 func player_pos():
 	return $Ship.global_position
+
+
+func _on_DiceTray2_diePicked(die):
+	currentDie = die
+
+
+func _on_ShieldReceiver_received(die):
+	$Ship.heal(die.face)
+	die.consume()
+
+
+func _on_ThrottleReceiver_received(die):
+	timeScale = throttles[die.face]
+	$CanvasLayer/ThrottleGauge.value = die.face
+	die.consume()

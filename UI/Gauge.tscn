@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/PixilArt/white-gauge.png" type="Texture" id=1]
+[ext_resource path="res://UI/Gauge.gd" type="Script" id=2]
+
+[node name="Gauge" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pip1" type="TextureRect" parent="."]
+modulate = Color( 0.337255, 0.627451, 0.286275, 1 )
+margin_right = 20.0
+margin_bottom = 48.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pip2" type="TextureRect" parent="."]
+modulate = Color( 0.337255, 0.627451, 0.286275, 1 )
+margin_left = 28.0
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pip3" type="TextureRect" parent="."]
+modulate = Color( 0.337255, 0.627451, 0.286275, 1 )
+margin_left = 56.0
+margin_top = -0.416092
+margin_right = 76.0
+margin_bottom = 47.5839
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pip4" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 0, 1 )
+margin_left = 84.0
+margin_top = -0.416092
+margin_right = 104.0
+margin_bottom = 47.5839
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pip5" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 0, 1 )
+margin_left = 112.0
+margin_top = 0.416077
+margin_right = 132.0
+margin_bottom = 48.4161
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pip6" type="TextureRect" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 140.0
+margin_top = 0.416077
+margin_right = 160.0
+margin_bottom = 48.4161
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
