@@ -6,6 +6,9 @@ signal dead()
 
 var level
 
+var top_left
+var bottom_right
+
 var health = 6
 
 class Accelerator:
@@ -46,9 +49,33 @@ onready var down = Accelerator.new(accel, 0.0)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	level = get_parent()
+	
+var d = 0.0
 
 func _physics_process(delta):
 	var speed = Vector2.ZERO
+	
+	d += delta
+	
+	if d > 1.0:
+		d = 0.0
+#		prints(global_position.x, global_position.y)
+	
+	if global_position.x < top_left.x:
+		right = left
+		left = Accelerator.new(accel, 0)
+	
+	if global_position.y < top_left.y:
+		down = up
+		up = Accelerator.new(accel, 0)
+	
+	if global_position.x > bottom_right.x:
+		left = right
+		right = Accelerator.new(accel, 0)
+	
+	if global_position.y > bottom_right.y:
+		up = down
+		down = Accelerator.new(accel, 0)
 	
 	# Originally the timescale was a kind of time control
 	# I've adjusted it to be throttle control, though, so I turn the same

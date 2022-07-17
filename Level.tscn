@@ -185,6 +185,31 @@ margin_bottom = 1104.14
 mouse_filter = 2
 value = 2
 
+[node name="Extents" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopLeft" type="Control" parent="CanvasLayer/Extents"]
+margin_left = 31.907
+margin_top = 27.0165
+margin_right = 71.907
+margin_bottom = 71.0165
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomRight" type="Control" parent="CanvasLayer/Extents"]
+margin_left = 1528.99
+margin_top = 1005.21
+margin_right = 1568.99
+margin_bottom = 1049.21
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="DiceTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true

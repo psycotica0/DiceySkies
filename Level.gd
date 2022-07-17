@@ -24,8 +24,16 @@ func _ready():
 	currentLevel.level = self
 	$LevelHolder.add_child(currentLevel)
 	$CanvasLayer/DiceTray/Dice1.consume()
-	for _i in range(2):
+	# Extents
+	var o = $CanvasLayer/Extents/TopLeft.get_global_transform()
+	# I can't figure out how to do the transform properly, so you get 0.25...
+	# GameJam!
+	$Ship.top_left = 0.25 * (get_viewport_transform().inverse() * o.origin)
+	$Ship.bottom_right = 0.25 * (get_viewport_transform().inverse() * $CanvasLayer/Extents/BottomRight.get_global_transform().origin)
+	for _i in range(8):
 		add_die()
+		$CanvasLayer/DiceTray2.roll_die()
+	$CanvasLayer/Extents.visible = false
 
 func add_die():
 	var face = randi() % 6 + 1
