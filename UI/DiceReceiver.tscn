@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://UI/DiceReceiver.gd" type="Script" id=1]
 [ext_resource path="res://UI/DiceButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/PixilArt/receiver_slot.png" type="Texture" id=3]
 
 [node name="DiceReceiver" type="Control"]
-modulate = Color( 0.56, 0.56, 0.56, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1552.0
@@ -15,7 +15,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Slot" type="TextureRect" parent="."]
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 52.0
+margin_bottom = 52.0
+texture = ExtResource( 3 )
+expand = true
+
 [node name="DiceButton" parent="." instance=ExtResource( 2 )]
+colour = 3
 [connection signal="mouse_entered" from="." to="." method="_on_DiceReceiver_mouse_entered"]
 [connection signal="mouse_exited" from="DiceButton" to="." method="_on_DiceButton_mouse_exited"]
 [connection signal="picked" from="DiceButton" to="." method="_on_DiceButton_picked"]

@@ -1,7 +1,7 @@
 extends Control
 
 export (bool) var active setget _set_active
-export (int, "Red", "Green", "Yellow") var colour
+export (int, "Red", "Green", "Yellow", "Grey") var colour
 export (int, 1, 6) var face setget _set_face
 
 signal consumed()
@@ -18,6 +18,8 @@ func set_colour():
 			self.modulate = Color("56a049")
 		2:
 			self.modulate = Color("ffff00")
+		3:
+			self.modulate = Color("505050")
 
 func _set_face(value):
 	face = value

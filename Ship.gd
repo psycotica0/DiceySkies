@@ -156,3 +156,27 @@ func heal(amount):
 	if health > 6:
 		health = 0
 	emit_signal("health_updated", health)
+
+
+func _on_Left_received(die):
+	if left.done:
+		left = Accelerator.new(accel, die.face)
+		die.consume()
+
+
+func _on_Right_received(die):
+	if right.done:
+		right = Accelerator.new(accel, die.face)
+		die.consume()
+
+
+func _on_Up_received(die):
+	if up.done:
+		up = Accelerator.new(accel, die.face)
+		die.consume()
+
+
+func _on_Down_received(die):
+	if down.done:
+		down = Accelerator.new(accel, die.face)
+		die.consume()
