@@ -7,6 +7,7 @@ func _ready():
 	for child in $Buttons.get_children():
 		child.active = false
 		child.connect("picked", self, "_on_DiceButton_picked", [child])
+	$AnimationPlayer.play("FlashRedDie")
 
 func roll_die():
 	var empty
