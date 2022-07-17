@@ -22,7 +22,8 @@ var startShipPos
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	currentLevelScene = preload("res://Levels/SimpleTestLevel.tscn")
+#	currentLevelScene = preload("res://Levels/SimpleTestLevel.tscn")
+	currentLevelScene = preload("res://Levels/Level1.tscn")
 	startShipPos = $Ship.global_position
 	randomize()
 	fadedOut()
