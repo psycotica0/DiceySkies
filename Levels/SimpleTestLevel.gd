@@ -46,3 +46,7 @@ func _physics_process(delta):
 	impulse.integrate(delta * level.timeScale)
 	speed.y -= level.timeScale * impulse.value
 	translate(speed)
+
+
+func _on_Checkpoint_body_entered(body):
+	level.checkpoint()

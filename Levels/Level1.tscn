@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Levels/SimpleTestLevel.gd" type="Script" id=1]
 [ext_resource path="res://KennyShmupTilemap.tres" type="TileSet" id=2]
+[ext_resource path="res://LevelLoader.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Levels/EnemyTutorial.tscn" type="PackedScene" id=4]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource( 1 )
@@ -140,3 +142,7 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LevelLoader" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -1712 )
+next_level = ExtResource( 4 )

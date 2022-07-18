@@ -17,6 +17,8 @@ const throttles = {
 export (Curve) var bounce
 
 var currentLevelScene
+var nextLevelScene
+var nextLevel
 var currentLevel
 var startShipPos
 
@@ -24,6 +26,7 @@ var startShipPos
 func _ready():
 #	currentLevelScene = preload("res://Levels/SimpleTestLevel.tscn")
 	currentLevelScene = preload("res://Levels/Level1.tscn")
+#	currentLevelScene = preload("res://Levels/Gauntlet.tscn")
 	startShipPos = $Ship.global_position
 	randomize()
 	fadedOut()
@@ -48,9 +51,29 @@ func load_level():
 	$Ship.global_position = startShipPos
 	if currentLevel:
 		currentLevel.queue_free()
+	if nextLevel:
+		nextLevel.queue_free()
+		nextLevel = null
 	currentLevel = currentLevelScene.instance()
 	currentLevel.level = self
 	$LevelHolder.add_child(currentLevel)
+
+func loadNextLevel(scene, offset):
+	nextLevelScene = scene
+	nextLevel = nextLevelScene.instance()
+	nextLevel.position = $LevelHolder.to_local(offset)
+	nextLevel.level = self
+	prints("Load next", currentLevel, nextLevel)
+	$LevelHolder.add_child(nextLevel)
+
+func checkpoint():
+	if not nextLevel:
+		return
+	
+	prints("Checkpoint", currentLevel, nextLevel)
+	currentLevel = nextLevel
+	nextLevel = null
+	currentLevelScene = nextLevelScene
 
 func _on_die_pressed(die):
 	currentDie = die
@@ -84,6 +107,7 @@ func _on_Heal_pressed():
 func _on_Ship_health_updated(health):
 #	$CanvasLayer/HBoxContainer/Health.text = str(health)
 	$CanvasLayer/ShieldGauge.value = health
+
 
 func fadedOut():
 	$Ship.reset()
