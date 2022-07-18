@@ -31,11 +31,11 @@ func _ready():
 	randomize()
 	fadedOut()
 	# Extents
-	var o = $CanvasLayer/Extents/TopLeft.get_global_transform()
+	var o = $CanvasLayer/Extents/TopLeft.get_viewport_transform() * $CanvasLayer/Extents/TopLeft.get_global_transform()
 	$Ship.top_left = get_viewport_transform().affine_inverse().xform(o.origin)
-	var b = $CanvasLayer/Extents/BottomRight.get_global_transform()
+	var b = $CanvasLayer/Extents/BottomRight.get_viewport_transform() * $CanvasLayer/Extents/BottomRight.get_global_transform()
 #	prints(0.25 * (get_viewport_transform().inverse() * b.origin) , get_viewport_transform().affine_inverse().xform(b.origin))
-	$Ship.bottom_right = get_viewport_transform().affine_inverse().xform($CanvasLayer/Extents/BottomRight.get_global_transform().origin)
+	$Ship.bottom_right = get_viewport_transform().affine_inverse().xform(b.origin)
 #	prints($Ship.top_left, get_viewport_transform().affine_inverse().xform(o.origin))
 	$CanvasLayer/Extents.visible = false
 	load_level()
